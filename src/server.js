@@ -4,6 +4,10 @@ import pino from 'pino-http';
 import dotenv from 'dotenv';
 
 import { getAllContacts, getContactById } from './services/contacts.js';
+import studentsRouter from './routers/students.js';
+
+import { errorHandler } from './middlewares/errorHandler.js';
+import { notFoundHandler } from './middlewares/notFoundHandler.js';
 
 
 dotenv.config();
@@ -16,6 +20,8 @@ const setupServer = () => {
 
   app.use(cors());
   app.use(pino());
+
+  app.use(studentsRouter);
 
   app.get('/', (req, res) => {
     res.send('Home page');
@@ -66,6 +72,12 @@ const setupServer = () => {
       });
     }
   });
+
+  app.use(studentsRouter);
+
+  app.use('*', notFoundHandler);
+
+  app.use(errorHandler);
 
   app.use((req, res, next) => {
     res.status(404).json({ message: 'Not found' });
