@@ -1,5 +1,4 @@
-// import { Contact } from '../db/models/Contact.js';
-import { Contact } from '../db/Contact.js';
+import { Contact } from '../db/models/Contact.js';
 
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 
