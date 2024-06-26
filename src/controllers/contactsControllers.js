@@ -7,12 +7,27 @@ import {
 } from '../services/contacts.js';
 
 import createHttpError from 'http-errors';
-import mongoose from 'mongoose';
+
+import { paginationParams } from '../utils/parsePaginationParams.js';
+
+import { parseSortParams } from '../utils/parseSortParams.js';
+
+import { parseFilterParams } from '../utils/parseFilterParams.js';
 
 
 // all contacts
 export const getContactsController = async (req, res) => {
-  const contacts = await getAllContacts();
+  const { page, perPage } = paginationParams(req.query);
+  const { sortBy, sortOrder } = parseSortParams(req.query);
+  const filter = parseFilterParams(req.query);
+
+  const contacts = await getAllContacts({
+    page,
+    perPage,
+    sortBy,
+    sortOrder,
+    filter,
+  });
 
   res.json({
     status: 200,
@@ -26,9 +41,6 @@ export const getContactsController = async (req, res) => {
 export const getContactByIdController = async (req, res, next) => {
   const { contactId } = req.params;
 
-  if (!mongoose.Types.ObjectId.isValid(contactId)) {
-    return next(createHttpError(404, 'Contact not found'));
-  }
   try {
     const contact = await getContactById(contactId);
 
@@ -110,3 +122,4 @@ export const deleteContactController = async (req, res, next) => {
 
   res.status(204).send();
 };
+
