@@ -1,38 +1,35 @@
-import express from 'express';
-import cors from 'cors';
-import pino from 'pino-http';
-import dotenv from 'dotenv';
-import router from './routers/contacts.js';
-import { notFoundHandler } from './middlewares/notFoundHandler.js';
-import { errorHandler } from './middlewares/errorHandler.js';
+import express from "express";
+import cors from "cors";
+import pino from "pino-http";
 
-dotenv.config();
+import moviesRouter from "./routers/movies-router.js";
 
+import notFoundHanler from "./middlewares/notFoundHandler.js";
+import errorHandler from "./middlewares/errorHandler.js";
 
-const setupServer = () => {
-  const app = express();
-  const PORT = 3000;
+import env from "./utils/env.js";
 
-  app.use(express.json());
-  app.use(cors());
-  app.use(pino());
+const port = env("PORT", "3000");
 
+const startServer = () => {
+    const app = express();
 
-  app.get('/', (req, res) => {
-    res.send('Home page');
-  });
+    const logger = pino({
+        transport: {
+            target: "pino-pretty"
+        }
+    });
 
-  app.use(router);
+    // app.use(logger);
+    app.use(cors());
+    app.use(express.json());
 
+    app.use("/api/movies", moviesRouter);
 
-  app.use('*', notFoundHandler);
-  app.use(errorHandler);
+    app.use(notFoundHanler);
+    app.use(errorHandler);
 
+    app.listen(port, () => console.log(`Server running on ${port} PORT`))
+}
 
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-  });
-};
-
-
-export default setupServer;
+export default startServer;
