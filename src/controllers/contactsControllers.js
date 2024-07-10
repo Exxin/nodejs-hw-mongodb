@@ -9,6 +9,8 @@ import {
   updateContact,
   deleteContact,
 } from '../services/contacts.js';
+import { saveFileToCloudinary } from '../utils/saveFileToCloudinary.js';
+
 
 
 // all contacts
@@ -75,6 +77,16 @@ export const createContactController = async (req, res, next) => {
     return res.status(400).json({ error: 'PhoneNumber is required' });
   }
 
+  let photoUrl = null;
+
+    if (req.file) {
+    try {
+      photoUrl = await saveFileToCloudinary(req.file.path);
+    } catch (error) {
+      return next(error);
+    }
+  }
+
   try {
     const newContact = await createContact({
       name,
@@ -83,6 +95,7 @@ export const createContactController = async (req, res, next) => {
       isFavourite,
       contactType,
       userId,
+      photo: photoUrl,
     });
 
     res.status(201).json({
@@ -94,6 +107,44 @@ export const createContactController = async (req, res, next) => {
     next(error);
   }
 };
+
+
+// export const createContactController = async (req, res, next) => {
+//   const { name, phoneNumber, email, isFavourite, contactType, file } = req.body;
+//   const userId = req.user._id;
+//   let photoUrl = null;
+//   if (!name) {
+//     return res.status(400).json({ error: 'Name is required' });
+//   }
+
+//   if (!phoneNumber) {
+//     return res.status(400).json({ error: 'PhoneNumber is required' });
+//   }
+//   if (file) {
+//     photoUrl = await saveFileToCloudinary(file);
+//   }
+//   try {
+//     const newContact = await createContact({
+//       name,
+//       phoneNumber,
+//       email,
+//       isFavourite,
+//       contactType,
+//       userId,
+//       photo: photoUrl
+
+//       });
+
+//     res.status(201).json({
+//       status: 201,
+//       message: 'Successfully created a contact!',
+//       data: newContact,
+//     });
+//   } catch (error) {
+//     next(error);
+//   }
+// };
+
 
 
 // patch
@@ -136,5 +187,52 @@ export const deleteContactController = async (req, res, next) => {
     res.status(204).send();
   } catch (error) {
     next(error);
+  }
+};
+
+
+// CLOUDINARY
+export const patchStudentController = async (req, res, next) => {
+  const { contactId } = req.params;
+  const photo = req.file;
+
+  let photoUrl;
+
+  if (photo) {
+    if (process.env.ENABLE_CLOUDINARY === 'true') {
+      try {
+        photoUrl = await saveFileToCloudinary(photo);
+      } catch (error) {
+        next(createHttpError(500, 'Failed to upload file to Cloudinary', error));
+        return;
+      }
+    } else {
+      try {
+        photoUrl = await saveFileToUploadDir(photo);
+      } catch (error) {
+        next(createHttpError(500, 'Failed to upload file to local directory', error));
+        return;
+      }
+    }
+  }
+
+  try {
+    const result = await updateContact(contactId, {
+      ...req.body,
+      photo: photoUrl,
+    });
+
+    if (!result) {
+      next(createHttpError(404, 'Contact not found'));
+      return;
+    }
+
+    res.json({
+      status: 200,
+      message: 'Successfully patched a contact!',
+      data: result.contact,
+    });
+  } catch (error) {
+    next(createHttpError(500, 'Failed to update contact', error));
   }
 };
