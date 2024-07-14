@@ -7,10 +7,7 @@ import { User } from '../db/models/User.js';
 import jwt from 'jsonwebtoken';
 import { sendEmail } from '../utils/sendMail.js';
 import handlebars from 'handlebars';
-import { TEMPLATES_DIR } from '../constants/index.js';
 import dotenv from 'dotenv';
-import path from 'node:path';
-import fs from 'node:fs/promises';
 
 dotenv.config();
 
@@ -116,19 +113,19 @@ export const requestResetToken = async (email) => {
 
     return resetToken;
   } catch (error) {
+    console.error('Error sending email:', error);
     throw createHttpError(500, 'Failed to send the email, please try again later.', error);
   }
 };
-
-
 
 // pwd reset
 export const resetPassword = async (payload) => {
   let entries;
 
   try {
-    entries = jwt.verify(payload.token, process.env('JWT_SECRET'));
-  } catch (err) {
+    entries = jwt.verify(payload.token, process.env.JWT_SECRET);
+      } catch (err) {
+
     if (err instanceof Error) throw createHttpError(401, 'Token is expired or invalid.');
     throw err;
   }
