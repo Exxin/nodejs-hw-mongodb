@@ -1,6 +1,6 @@
 import cloudinary from 'cloudinary';
 import { CLOUDINARY } from '../constants/index.js';
-import { env } from './env.js';
+import { env } from './.env.js';
 
 // const CLOUD_NAME = 'dg7oyfk1d';
 // const API_KEY = '521692969348882';
