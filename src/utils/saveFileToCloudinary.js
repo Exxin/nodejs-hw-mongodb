@@ -6,7 +6,7 @@ import { env } from './env.js';
 // const API_KEY = '521692969348882';
 // const API_SECRET = 'nbIIMsLpfYflgNjkyq20ziTKVVs';
 
-cloudinary.config({
+cloudinary.v2.config({
   secure: true,
   cloud_name: env(CLOUDINARY.CLOUD_NAME),
   api_key: env(CLOUDINARY.API_KEY),
