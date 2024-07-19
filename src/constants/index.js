@@ -18,12 +18,11 @@ export const CLOUDINARY = {
   CLOUD_NAME: process.env.CLOUD_NAME,
   API_KEY: process.env.API_KEY,
   API_SECRET: process.env.API_SECRET,
-  // CLOUD_NAME: 'dg7oyfk1d',
-  // API_KEY: '521692969348882',
-  // API_SECRET: 'nbIIMsLpfYflgNjkyq20ziTKVVs',
 };
 
 export const TEMP_UPLOAD_DIR = path.join(process.cwd(), 'temp');
 export const UPLOAD_DIR = path.join(process.cwd(), 'uploads');
 
 export const TEMPLATES_DIR = path.join(process.cwd(), 'src', 'templates');
+
+export const SWAGGER_PATH = path.join(process.cwd(), 'docs', 'swagger.json');
