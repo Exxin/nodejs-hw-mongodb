@@ -3,13 +3,13 @@ import path from 'node:path';
 import { readFile } from 'fs/promises';
 import createHttpError from 'http-errors';
 
-const PATH_JSON = path.resolve("google-oauth.json");
+const PATH_JSON = path.join(process.cwd(), 'google-oauth.json');
 
 const oauthConfig = JSON.parse(await readFile(PATH_JSON, 'utf8'));
 
 const googleOAuthClient = new OAuth2Client({
-  clientId: '1023602385270-fvjc183aqggcs1q49l8090rtjqg2nvus.apps.googleusercontent.com',
-  clientSecret: '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',
+  clientId: process.env.GOOGLE_AUTH_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_AUTH_CLIENT_SECRET,
   redirectUri: oauthConfig.web.redirect_uris[0],
 });
 
