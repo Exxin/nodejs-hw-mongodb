@@ -3,7 +3,7 @@ import path from 'node:path';
 import { readFile } from 'fs/promises';
 import createHttpError from 'http-errors';
 
-const PATH_JSON = path.join(process.cwd(), 'google-oauth.json');
+const PATH_JSON = path.resolve("google-oauth.json");
 
 const oauthConfig = JSON.parse(await readFile(PATH_JSON, 'utf8'));
 
