@@ -1,6 +1,6 @@
 import cloudinary from 'cloudinary';
 import { CLOUDINARY } from '../constants/index.js';
-import env from "env.js";
+
 import 'dotenv/config';
 
 // const CLOUD_NAME = 'dg7oyfk1d';
@@ -9,9 +9,9 @@ import 'dotenv/config';
 
 cloudinary.config({
   secure: true,
-  cloud_name: env.CLOUD_NAME,
-  api_key: env.API_KEY,
-  api_secret: env.API_SECRET,
+  cloud_name: process.env.CLOUD_NAME,
+  api_key: process.env.API_KEY,
+  api_secret: process.env.API_SECRET,
 });
 
 export const saveFileToCloudinary = async (file) => {
