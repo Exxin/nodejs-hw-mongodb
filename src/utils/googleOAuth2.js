@@ -5,7 +5,7 @@ import createHttpError from 'http-errors';
 // import env from ".env.js";
 import 'dotenv/config';
 
-const PATH_JSON = path.join(process.cwd(), 'google-oauth.json');
+const PATH_JSON = path.join(process.cwd(), '/google-oauth.json');
 
 const clientId = process.env.GOOGLE_CLIENT_ID;
 const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
