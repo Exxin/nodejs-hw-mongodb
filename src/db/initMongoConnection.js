@@ -23,3 +23,4 @@ export const initMongoConnection = async () => {
   }
 };
 
+initMongoConnection();
