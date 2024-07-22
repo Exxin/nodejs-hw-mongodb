@@ -1,12 +1,11 @@
 import { OAuth2Client } from 'google-auth-library';
-// import path from 'node:path';
+import path from 'node:path';
 import { readFile } from 'fs/promises';
 import createHttpError from 'http-errors';
 // import env from ".env.js";
 import 'dotenv/config';
-import { join } from 'path';
 
-const PATH_JSON = join(process.cwd(), 'src/google-oauth.json');
+const PATH_JSON = path.join(process.cwd(), 'src/google-oauth.json');
 
 const clientId = process.env.GOOGLE_CLIENT_ID;
 const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
