@@ -2,6 +2,7 @@
 /node_modules
 
 .env
+.env.js
 
 .vscode
 .DS_Store
