@@ -7,8 +7,11 @@ import 'dotenv/config';
 
 const PATH_JSON = path.join(process.cwd(), 'google-oauth.json');
 
-const clientId = process.env.GOOGLE_CLIENT_ID;
-const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+// const clientId = process.env.GOOGLE_CLIENT_ID;
+// const clientSecret = process.env.GOOGLE_CLIENT_SECRET;
+
+const clientId = env("GOOGLE_AUTH_CLIENT_ID");
+const clientSecret = env("GOOGLE_AUTH_CLIENT_ID");
 
 const oauthConfig = JSON.parse(await readFile(PATH_JSON, 'utf8'));
 
