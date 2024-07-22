@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import 'dotenv/config';
 
 // const MONGODB_USER = 'exxinblood';
 // const MONGODB_PASSWORD = 'o4BsI9P9AjbFMDt9';
