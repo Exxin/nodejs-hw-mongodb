@@ -1,6 +1,7 @@
-import cloudinary from 'cloudinary';
+// import cloudinary from 'cloudinary';
 import { CLOUDINARY } from '../constants/index.js';
 import 'dotenv/config';
+import { v2 as cloudinary } from 'cloudinary';
 
 const CLOUD_NAME = 'dg7oyfk1d';
 const API_KEY = '521692969348882';
