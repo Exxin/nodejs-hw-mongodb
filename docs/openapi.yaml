@@ -14,7 +14,7 @@ tags:
     description: Auth operations.
 servers:
   - url: http://localhost:3000
-  - url: https://example.com/api/v1
+  - url: https://nodejs-hw-mongodb-5-qo8f.onrender.com
 paths:
   /contacts/{contactId}:
     get:
@@ -58,7 +58,7 @@ components:
           format: email
           example: alex@gmail.com
         isFavourite:
-          description: "Is this contact a favorite?"
+          description: 'Is this contact a favorite?'
           type: boolean
           example: true
         contactType:
