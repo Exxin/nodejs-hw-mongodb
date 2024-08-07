@@ -138,9 +138,42 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/Contact"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Alex Boo"
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "example": "+380960000000"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "alex@gmail.com"
+                  },
+                  "isFavourite": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "contactType": {
+                    "type": "string",
+                    "enum": ["personal", "work"],
+                    "example": "work"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "example": "65e4decdd286b30065d54af9"
+                  },
+                  "photo": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Contact's photo"
+                  }
+                }
               }
             }
           }
@@ -161,6 +194,7 @@
           }
         }
       }
+
     },
     "/contacts/{contactId}": {
       "get": {
@@ -219,9 +253,42 @@
         "requestBody": {
           "required": true,
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/Contact"
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "example": "Alex Boo"
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "example": "+380960000000"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email",
+                    "example": "alex@gmail.com"
+                  },
+                  "isFavourite": {
+                    "type": "boolean",
+                    "example": true
+                  },
+                  "contactType": {
+                    "type": "string",
+                    "enum": ["personal", "work"],
+                    "example": "work"
+                  },
+                  "userId": {
+                    "type": "string",
+                    "example": "65e4decdd286b30065d54af9"
+                  },
+                  "photo": {
+                    "type": "string",
+                    "format": "binary",
+                    "description": "Contact's photo"
+                  }
+                }
               }
             }
           }
@@ -244,7 +311,7 @@
             "description": "Contact not found"
           }
         }
-      },
+      }
       "delete": {
         "tags": ["Contacts"],
         "summary": "Delete a contact",
