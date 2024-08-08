@@ -1,6 +1,5 @@
 import Joi from 'joi';
 
-
 export const createContactsSchema = Joi.object({
   name: Joi.string().min(3).max(30),
   phoneNumber: Joi.string().pattern(/^\+\d{12}$/).required().messages({
@@ -15,8 +14,7 @@ export const createContactsSchema = Joi.object({
   onDuty: Joi.boolean(),
 });
 
-
-export const updateStudentSchema = Joi.object({
+export const updateContactsSchema = Joi.object({
   name: Joi.string().min(3).max(30),
   phoneNumber: Joi.string().pattern(/^\+\d{12}$/).required().messages({
     'string.pattern.base': 'Phone number must be in the format +380... (12 digits after +)'
@@ -29,7 +27,6 @@ export const updateStudentSchema = Joi.object({
   avgMark: Joi.number().min(2).max(12),
   onDuty: Joi.boolean(),
 });
-
 
 const dataToValidate = {
   name: 'Yulia Shevchenko',
