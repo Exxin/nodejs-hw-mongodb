@@ -6,6 +6,7 @@ required:
   - isFavourite
   - contactType
   - userId
+  - photo
 properties:
   name:
     description: "Contact's name"
@@ -21,7 +22,7 @@ properties:
     format: email
     example: alex@gmail.com
   isFavourite:
-    description: "Is this contact a favorite?"
+    description: 'Is this contact a favorite?'
     type: boolean
     example: true
   contactType:
