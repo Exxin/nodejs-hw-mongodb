@@ -142,7 +142,17 @@
           "content": {
             "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/Contact"
+                "type": "object",
+                "properties": {
+                  "name": { "type": "string", "minLength": 3, "maxLength": 30 },
+                  "phoneNumber": { "type": "string", "pattern": "^\\+\\d{12}$" },
+                  "email": { "type": "string", "format": "email" },
+                  "isFavourite": { "type": "boolean", "default": false },
+                  "contactType": { "type": "string", "enum": ["work", "home", "personal"], "default": "personal" },
+                  "userId": { "type": "string" },
+                  "photo": { "type": "string", "format": "binary" }
+                },
+                "required": ["name", "phoneNumber", "email", "isFavourite", "contactType", "userId", "photo"]
               }
             }
           }
@@ -210,6 +220,7 @@
           {
             "in": "path",
             "name": "contactId",
+            "required": true,
             "schema": {
               "type": "string",
               "example": "65ca67e7ae7f10c88b598384"
@@ -230,7 +241,7 @@
           "200": {
             "description": "Contact updated successfully",
             "content": {
-              "multipart/form-data": {
+              "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/Contact"
                 }
@@ -286,14 +297,6 @@
     "schemas": {
       "Contact": {
         "type": "object",
-        "required": [
-          "name",
-          "phoneNumber",
-          "email",
-          "isFavourite",
-          "contactType",
-          "userId"
-        ],
         "properties": {
           "name": {
             "description": "Contact's name",
@@ -328,10 +331,9 @@
             "example": "65e4decdd286b30065d54af9"
           },
           "photo": {
-            "description": "Link to contact's photo",
+            "description": "Photo of the contact",
             "type": "string",
-            "format": "uri",
-            "example": "https://res.cloudinary.com/uqwgdu/image/upload/image.png"
+            "format": "binary"
           }
         }
       }
