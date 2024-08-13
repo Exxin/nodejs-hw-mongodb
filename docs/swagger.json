@@ -52,62 +52,6 @@
               "example": 10
             },
             "description": "Number of items per page"
-          },
-          {
-            "in": "query",
-            "name": "name",
-            "schema": {
-              "type": "string",
-              "example": "Alex Boo"
-            },
-            "description": "Contact's name"
-          },
-          {
-            "in": "query",
-            "name": "phoneNumber",
-            "schema": {
-              "type": "string",
-              "example": "+380960000000"
-            },
-            "description": "Contact's phone number"
-          },
-          {
-            "in": "query",
-            "name": "email",
-            "schema": {
-              "type": "string",
-              "format": "email",
-              "example": "alex@gmail.com"
-            },
-            "description": "Contact's email"
-          },
-          {
-            "in": "query",
-            "name": "isFavourite",
-            "schema": {
-              "type": "boolean",
-              "example": true
-            },
-            "description": "Is this contact a favorite?"
-          },
-          {
-            "in": "query",
-            "name": "contactType",
-            "schema": {
-              "type": "string",
-              "enum": ["personal", "work"],
-              "example": "work"
-            },
-            "description": "Type of contact"
-          },
-          {
-            "in": "query",
-            "name": "userId",
-            "schema": {
-              "type": "string",
-              "example": "65e4decdd286b30065d54af9"
-            },
-            "description": "User's id"
           }
         ],
         "responses": {
